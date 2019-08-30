@@ -1,0 +1,53 @@
+    <wxs module="numberUtil" src="../../utils/number.wxs"></wxs>
+    <view class="pinGo-banner">
+        <image src="{{timeGoBanner}}" mode="aspectFill" />
+    </view>
+   <view class="pingo-list bg-gradual-red {{isEnd?'isEnd':''}}" style="height:auto;margin-bottom:0rpx;">
+        <block wx:for="{{list}}" wx:key="{{index}}" >
+            <view class="cu-card pingo bg-white radius-lg">
+                <view class="info" bindtap="showDetail" data-id="{{item.Id}}">
+                    <view class="pingo-info-pic">
+                        <image src="{{item.IconUrl}}" mode="aspectFill" />
+                    </view>
+                    <view class="countdow-info-txt">
+                        <view class="countdow-info-name">{{item.ProductName}}</view>
+                        <view class="">
+           <view class="cu-capsule radius padding-lr-xs">
+            <view class="cu-tag bg-red sm">
+              <text class="cuIcon-hot"></text>
+            </view>
+            <view class="cu-tag line-red sm">已拼{{item.GroupCount}}件</view>
+        </view>
+               <view class="cu-tag line-red radius sm">包邮</view>
+                 <view class="cu-tag line-red radius sm">包税</view>
+                 </view>
+                  <view class="padding-lr-xs">
+                <view class="cu-tag bg-red text-white radius sm  ">直降¥{{numberUtil.numberFormat(item.MiniSalePrice-item.MiniGroupPrice)}}</view>
+                 <view class="cu-tag bg-red text-white radius sm ">{{item.LimitedNumber}}人团</view>
+          </view>
+                        <view class="countdow-info-b">
+              
+                            <view class="saleprice">
+            
+                                <view class="price text-price">
+                                    <text>{{item.MiniGroupPrice}}</text>
+                                </view>
+                                <view class="oldprice text-price" >
+                                    <text>{{item.MiniSalePrice}}</text>
+                                </view>
+                            </view>
+                            <view class="pingo-btn round {{item.CountDownType=='1'?'countdow-start':''}}">
+                                <text>去开团</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 我的拼团 -->
+  <view class="my-pin-triger" bindtap="bindUserTap" data-url="../grouporder/grouporder">
+  <image src="http://zhwmj.oss-cn-shenzhen.aliyuncs.com/37.png"></image>
+  </view>
+  <!-- <button class="my-pin-triger cu-btn cuIcon-emoji icon bg-halfblack lg"></button> -->
+

@@ -1,0 +1,58 @@
+/* pages/search/search.wxss */
+page{background: #fff;}
+.searchl input{color: #212121;}
+.searls{ display: flex; border-bottom: 1rpx #e0e0e0 solid;}
+.searlsr{width: 540rpx; text-align: right;}
+.searlsr image{width: 40rpx; height: 40rpx;}
+.searchlslist{clear: both; overflow: hidden; border-bottom: 1rpx #e0e0e0 solid;}
+.searchlslist button::after{ border: none;}
+.searchlslist button {float: left; margin-right: 15rpx; font-size: 28rpx; line-height: 48rpx;  background: #fff; width: 662rpx; text-align: left; padding-left: 0; top: 0; color: #212121; min-height: 1rpx;}
+.search_btn{ color: #9E9E9E; opacity:0.8;filter:alpha(opacity=80); width: 44rpx; height: 44rpx; font-size: 44rpx; padding-top: 23rpx;}
+.searchlslist  text{ color: #BDBDBD; width: 24rpx; height: 24rpx; line-height: 48rpx; text-align: right;}
+.searclibut{position: relative; border-bottom: 1rpx #e0e0e0 solid;}
+.searchlslist .searclibut:last-child{ border-bottom: none;}
+.searchlslistq{ clear: both; overflow: hidden; width:330rpx; margin: 0 auto;}
+.searchlslistq button.qkls{margin: 0 auto; border-radius:8rpx; color: #424242;background: #FBFAFC; float: none; font-size: 28rpx; line-height: 40rpx; padding: 16rpx 32rpx;}
+.searlsl{font-size: 28rpx; line-height: 40rpx; color: #747474;}
+  .search{  
+      width: 80%;  
+    }  
+    .search_arr {  
+      border: 1px solid #d0d0d0;  
+      border-radius: 10rpx;  
+      margin-left: 20rpx;  
+    }  
+    .search_arr input{  
+      margin-left: 60rpx;  
+      height: 60rpx;  
+      border-radius: 5px;  
+    }  
+    .bc_text {  
+      line-height: 68rpx;  
+      height: 68rpx;  
+      margin-top: 34rpx;  
+    }  
+      
+    .sousuo {  
+      margin-left: 15rpx;  
+      width: 15%;  
+      line-height: 150%;  
+      text-align: center;  
+      border: 1px solid #d0d0d0;  
+      border-radius: 10rpx;  
+      padding-top: 10rpx;
+    }  
+    .page_row{  
+      display: flex;  
+      flex-direction: row;
+      margin-top: 10rpx;
+    }  
+    .searchcion {  
+      margin: 10rpx 10rpx 10rpx 10rpx;  
+      position: absolute;  
+      left:25rpx;  
+      z-index: 2;  
+      width: 20px;  
+      height: 20px;  
+      text-align: center;  
+    }  

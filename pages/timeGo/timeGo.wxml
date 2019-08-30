@@ -1,0 +1,78 @@
+
+ 
+<view class="page-section">
+ 
+<scroll-view scroll-x class="bg-red nav text-center fixed" scroll-with-animation >
+  <view class="cu-item padding wm-tab {{index==TabCur?'text-white cur':'text-gray light'}}" wx:for="{{tabnav}}" data-start="{{item.start}}" data-end="{{item.end}}" wx:key="{{index}}" bindtap="tabSelect" data-id="{{index}}" data-type="{{item.type}}" data-selected="{{item.selected}}">
+    <view class="timeinterval">{{item.start}}</view>
+    <view class="tip shadow">{{item.tip}}</view>
+  </view>
+</scroll-view>
+<!--tabend  -->
+<!-- 实时热抢 -->
+<view class="hotGo-container animation-fade radius-lg shadow cu-card bg-white margin-sm" wx:if="{{showHot&&randHotData.length}}">
+    <view class="cu-bar bg-white padding-bottom-sm">
+      <view class='action' >
+        <text class='cuIcon-countdown text-red'></text>实时热抢 
+        <view class="cu-tag text-sm sm bg-white text-gray">{{timeC}}s后换一批</view>
+      </view>
+    </view>
+    <view class="hotGo-items">
+    <view class="hotGo-item" wx:for="{{randHotData}}" wx:key="{{index}}" bindtap="BuyCountDown" data-id="{{item.CountDownId}}">
+    <image src="{{item.ThumbnailUrl160}}"></image>
+    <view class="cu-progress round xs wm-progress  bg-red light">
+        <view class="bg-red" style="width:{{loading?item.Percent+'%':''}};"></view>
+     </view>
+     <view class="title text-sm margin-tb-xs">{{item.ProductName}}</view>
+    <view class="action main-price">
+    <view class="text-price text-red vip-price">{{item.CountDownPrice}}</view>
+    <view class="text-price retail-price price-line">{{item.SalePrice}}</view>
+    </view>
+    </view>
+    </view>
+</view>
+<!-- 实时热抢end -->
+    <view class="countdown-list bg-white {{!hasData?'isEnd':''}}" style="margin-top:{{(randHotData.length>0&&showHot)?'0px':'50px'}}" wx:if="{{showList}}">
+    <block wx:if="{{CountDownList.length<=0}}">
+    <view class="none-data" style="height:{{timeGoHeight}}px">
+    <!-- <text class="cuIcon-text text-gray"></text> -->
+    <text class="tip text-gray">o(╯□╰)o没有数据！</text>
+    </view>
+    </block>
+        <block wx:for="{{CountDownList}}" wx:key="{{idx}}" wx:for-index="idx">
+            <view class="countdown">
+                <view class="info" bindtap="BuyCountDown" data-id="{{item.CountDownId}}">
+                    <view class="countdown-info-pic">
+                        <image src="{{item.ThumbnailUrl160}}" mode="aspectFill" />
+                    </view>
+                    <view class="countdow-info-txt">
+                        <view class="countdow-info-name">{{item.ProductName}}</view>
+                       
+                        <view class="countdow-info-b">
+          
+                            <view class="saleprice">
+                                        <view class="cu-progress round sm wm-progress bg-red light">
+                           <view class="bg-red" style="width:{{loading?item.Percent+'%':''}};"></view>
+                          <!-- {{(item.SaleCount/item.TotalCount)*100>30?'已抢'+item.Percent+'%':''}} -->
+                 
+                        </view>
+                                 <text class="left-progress-tip text-white">已抢{{item.SaleCount}}件</text>
+                          <text class="right-progress-tip {{item.Percent<75?'text-red':'text-white'}}">{{item.Percent+'%'}}</text>
+                          
+                                <view class="price {{item.CountDownType=='1'?'countdow-text':''}}">
+                                    ¥<text> {{item.CountDownPrice}}</text>
+                                </view>
+                                <view class="oldprice" wx:if="{{item.SalePrice>0}}">
+                                    <text>¥ {{item.SalePrice}}</text>
+                                </view>
+                            </view>
+                            <view class="countdown-btn round {{item.CountDownType=='1'?'countdow-start':''}}">
+                                <text>{{activeText}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
