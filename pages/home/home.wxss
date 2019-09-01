@@ -529,21 +529,26 @@ image {
 }
 
 .prodcut-list {
-    margin: 0 24rpx;
-    width: 702rpx;
+    /* margin: 0 24rpx;
+    width: 702rpx; */
 }
 
 .page-section .prodcut-list  .prodcut-comm {
-    margin: 0 -12rpx;
+    /* margin: 0 -12rpx; */
+    display: flex;
+    flex-wrap: wrap;
+    background: #f5f5f5;
+    padding: 20rpx;
+    margin-right: -20rpx;
 }
 
 .page-section .prodcut-list .prodcut {
+    flex: none;
     background-color: #fff;
-    width: 339rpx;
-    overflow: hidden;
-    float: left;
-    border-top: 1rpx solid #e0e0e0;
-    padding: 24rpx 12rpx 0 12rpx;
+    width: 47%;
+    margin: 0 20rpx 20rpx 0;
+    padding: 0 20rpx;
+    border-radius: 8rpx;
 }
 
 .page-section .prodcut-list .prodcut .product-des {

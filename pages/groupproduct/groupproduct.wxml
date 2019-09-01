@@ -21,7 +21,7 @@
         <view class="productcont">
             <view class="productjs pl24 pr24">
                 <view class="pricel pb24 pt24">
-                    <button class='distribution' open-type='share' wx:if='{{distributionInfo.IsShowBrokerage}}'>
+                    <button class='distribution' bindtap="onSharePoster" open-type-false='share' wx:if='{{distributionInfo.IsShowBrokerage}}'>
                         <view class='share_img'>
                             <image src='../../images/icon_share.png'></image>
                         </view>
@@ -318,3 +318,15 @@
 <view class="goTop" bindtap="goTop" hidden="{{gotopVal}}">
     <view class="iconfont icon-gotop"></view>
 </view>
+
+<view class='share-modal-bg' wx:if='{{showModal}}' bindtap='hideModal'>
+  <view class='canvas-wrap' catchlongpress='saveImg'>
+    <view><image src='{{shareImg}}' class='share-img'></image></view>
+    <view class='share-img-tips flex'>
+      <button class="cu-btn bg-red lg save-image" bindtap='saveImg'>生成海报</button>
+      <button class="cu-btn bg-yellow lg share-image" open-type='share'>分享</button>
+    </view>
+  </view>
+</view>
+
+<canvas style="width: 286px;height: 415px;background:red;position: fixed;top: -10000px;" canvas-id="sharePoster"></canvas>

@@ -2108,3 +2108,51 @@ button.distribution .share_img image {
   font-size: inherit;
   color: inherit;
 }
+
+/*
+共享海报弹窗
+*/
+.share-modal-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5)
+}
+
+.canvas-wrap {
+  position: absolute;
+  width: 572rpx;
+	height: 950rpx;
+	box-shadow: 0px 0px 35rpx 0px 
+		rgba(0, 0, 0, 0.36);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.share-img {
+  background-color: #ffffff;
+  width: 572rpx;
+	height: 850rpx;
+}
+
+.share-img-tips {
+  color: #bbbbbb;
+  text-align: center;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  height: 80rpx;
+}
+
+.share-img-tips .save-image {
+  flex: auto;
+  margin-right: 20rpx;
+}
+
+.share-img-tips .share-image {
+  flex: none;
+}

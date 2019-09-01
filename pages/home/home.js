@@ -258,6 +258,13 @@ Page({
         });
     },
     onLoad: function(options) {
+      // 跳转到具体分享页
+      console.log(2222222, decodeURIComponent(options.sharePage))
+      if (options.sharePage) {
+        wx.navigateTo({
+          url: decodeURIComponent(options.sharePage),
+        })
+      }
         // 生命周期函数--监听页面加载
       var that = this;
         var date=new Date();

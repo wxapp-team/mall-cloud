@@ -1,6 +1,7 @@
 var app = getApp();
 var WxParse = require('../wxParse/wxParse.js');
 var config = require("../../utils/config.js");
+var util = require("../../utils/util.js");
 
 Page({
     data: {
@@ -69,10 +70,11 @@ Page({
         }
     },
     onLoad: function(options) {
-        var distributorId = options.distributorId;
+        var distributorId = options.scene ? options.scene.split('-')[1] : options.distributorId;
         wx.setStorageSync("distributorId", distributorId);
         wx.showLoading();
-        const productid = options.id;
+        const productid = options.scene ? options.scene.split('-')[0] : options.id;
+
         this.setData({
             ProductId: productid,
             shopBranchId: parseInt(options.shopBranchId) || 0,
@@ -81,6 +83,107 @@ Page({
         })
         this.loadData(this);
     },
+
+    // 报存图片
+    saveImg() {
+      util.saveShareImg(this.data.shareImg);
+    },
+    // 隐藏海报窗口
+    hideModal() {
+      this.setData({
+        showModal: false
+      });
+    },
+    // 生成海报
+    onSharePoster: function() {
+      var that = this;
+
+      wx.showLoading({
+        title: '海报生成中'
+      })
+      app.getOpenId(function(openId) {
+        // 获取共享商品详情
+        wx.request({
+          url: app.getUrl(
+            `${app.globalData.getShareTheGoods}?openId=${openId}&productId=${that.data.ProductId}`
+          ),
+          method: "POST",
+          success: function(result) {
+            result = result.data;
+            if (result.success) {
+              // 用户头像
+              var avatar = result.data.Photo
+              var shareObj = {
+                name: result.data.ProductName,
+                pichName: result.data.Nick,
+                price: result.data.MinSalePrice,
+                maxPrice: result.data.MarketPrice
+              };
+              wx.getImageInfo({
+                src: avatar,
+                success: res => {
+                  shareObj.avatar = res.path;
+                  // 商品图片
+                  wx.getImageInfo({
+                    src: result.data.ProductImgs,
+                    success: res => {
+                      shareObj.cover = res.path;
+                      shareObj.coverWidth = res.width;
+                      shareObj.coverHeight = res.height;
+
+                      // 获取推荐用户
+                      var userInfo = wx.getStorageSync("userInfo");
+                      var distributorId = '';
+                      if (userInfo.IsDistributor) {
+                        distributorId = userInfo.UserId;
+                      }
+                      // 请求二维码
+                      wx.getImageInfo({
+                        src: app.getUrl(
+                          `${app.globalData.getQrCode}?openId=${openId}&scene=${that.data.ProductId}-${distributorId}&page=pages/productdetail/productdetail`
+                        ),
+                        success: res => {
+                          shareObj.qrcode = res.path;
+
+                          util.createdShareImg(shareObj);
+                          setTimeout(() => {
+                            wx.canvasToTempFilePath({
+                              x: 0,
+                              y: 0,
+                              canvasId: "sharePoster",
+                              success: function(res) {
+                                let shareImg = res.tempFilePath;
+                                that.setData({
+                                  shareImg: shareImg
+                                });
+                                that.setData({
+                                  showModal: true
+                                });
+                                wx.hideLoading();
+                              },
+                              fail: function(res) {}
+                            });
+                          }, 500);
+                        },
+                        fail: e => {
+                          console.log(e);
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            } else {
+              wx.showToast({
+                title: result.msg
+              });
+            }
+          }
+        });
+      });
+      return;
+    },
+
     onShareAppMessage: function() {  //小程序转发
         
         var that = this;
@@ -89,6 +192,10 @@ Page({
         if (userInfo.IsDistributor) {  //判断是否可以拿提成
             path += ('&distributorId=' + userInfo.UserId);
         }
+
+        this.setData({
+          showModal: false
+        });
        
         return {
             title: that.data.ProductName,

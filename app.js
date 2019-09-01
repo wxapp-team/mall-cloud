@@ -508,5 +508,9 @@ App({
         getShopHeader: "Distribution/GetShopHeader", //根据分销员获取小店信息
         getAddressList: "ShippingAddress/GetList", //获取用户收货地址
         getOrderBonus: "SmallProgAPI/UserOrder/GetOrderBonus", //获取订单红包
+        getQrCode: 'Product/GetUnlimited', // 获取二维码
+        getShareTheGoods: 'Product/ShareTheGoods', // 获取共享商品信息
+        getLimitShareTheGoods: 'LimitTimeBuy/ShareTheGoods', // 获取共享商品信息
+        getFightGroupShareTheGoods: 'FightGroup/ShareTheGoods', // 获取共享商品信息
     }
 })
